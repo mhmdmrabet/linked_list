@@ -9,15 +9,10 @@ void	print_list(Node *head);
 
 int	main(void)
 {
-	Node	a, b, c;
+	Node	*list1_head;
 
-	a.value = 5;
-	b.value = 6;
-	c.value = 7;
-	a.next = &b;
-	b.next = &c;
-	c.next = NULL;
-	print_list(&a);
+	list1_head = NULL;
+	print_list(&list1_head);
 }
 
 void	print_list(Node *head)
