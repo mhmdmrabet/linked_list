@@ -1,16 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
-typedef struct node{
-	int			value;
-	struct node	*next;
+typedef struct s_node{
+	int				value;
+	struct s_node	*next;
 }	t_Node;
 
-void	print_list(t_Node *head);
 t_Node	*insert_at_head(t_Node *head, int new_value);
 t_Node	*insert_at_tail(t_Node *head, int new_value);
 t_Node	*delete_at_head(t_Node *head);
 t_Node	*delete_at_tail(t_Node *head);
+void	replace_matches(t_Node *node, int find_value, int replace_value);
+void	print_list(t_Node *head);
+int		recursive_length(t_Node *node);
+int		is_member(t_Node *node, int find_value);
+int		count_matches(t_Node *node, int find_value);
+int		length(t_Node *head);
 
 int	main(void)
 {
@@ -19,16 +25,14 @@ int	main(void)
 	list1_head = NULL;
 	list1_head = insert_at_head(list1_head, 7);
 	list1_head = insert_at_head(list1_head, 4);
+	list1_head = insert_at_head(list1_head, 22);
 	list1_head = insert_at_head(list1_head, 2);
 	list1_head = insert_at_tail(list1_head, 22);
-	printf("BEFORE\n");
+	replace_matches(list1_head, 22, 24);
 	print_list(list1_head);
-	list1_head = delete_at_head(list1_head);
-	list1_head = delete_at_tail(list1_head);
-	printf("AFTER\n");
-	print_list(list1_head);
-	free(list1_head);
 }
+
+
 
 t_Node	*insert_at_head(t_Node *head, int new_value)
 {
@@ -99,6 +103,61 @@ t_Node	*delete_at_tail(t_Node *head)
 		free(current);
 		return (head);
 	}
+}
+
+int	recursive_length(t_Node *node)
+{
+	if (!node)
+		return (0);
+	return (1 + recursive_length(node->next));
+}
+
+int	length(t_Node *head)
+{
+	t_Node	*current;
+	int		i;
+
+	current = head;
+	i = 0;
+	while (current)
+	{
+		current = current->next;
+		i++;
+	}
+	return (i);
+}
+
+int	is_member(t_Node *node, int find_value)
+{
+	if (!node)
+		return (0);
+	else if (node->value == find_value)
+		return (1);
+	else
+	return (is_member(node->next, find_value));
+}
+
+int	count_matches(t_Node *node, int find_value)
+{
+	if (!node)
+		return (0);
+	else if (node->value == find_value)
+		return ((1 + count_matches(node->next, find_value)));
+	else
+		return (count_matches(node->next, find_value));
+}
+
+void	replace_matches(t_Node *node, int find_value, int replace_value)
+{
+	if (!node)
+		return ;
+	else if (node->value == find_value)
+	{
+		node->value = replace_value;
+		replace_matches(node->next, find_value, replace_value);
+	}
+	else
+		replace_matches(node->next, find_value, replace_value);
 }
 
 void	print_list(t_Node *head)
