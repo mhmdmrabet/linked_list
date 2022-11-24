@@ -124,6 +124,41 @@ t_Node	*delete_all_matches(t_Node *head, int delete_value, int *num_deleted)
 	}
 	return (current);
 }
+t_Node	*efficient_delete_match(t_Node *head, int delete_value, int *num_deleted)
+
+{
+	t_Node	*current;
+	t_Node	*new_head;
+	t_Node	*tmp;
+
+	current = head;
+	*num_deleted = 0;
+	if (!head)
+		return (NULL);
+	while (current->value == delete_value)
+	{
+		tmp = current;
+		current = current->next;
+		free(tmp);
+		*num_deleted = *num_deleted + 1;
+		if (!current)
+			return (NULL);
+	}
+	new_head = current;
+	while (current->next)
+	{
+		if (current->next->value == delete_value)
+		{
+			tmp = current->next;
+			current->next = current->next->next;
+			free(tmp);
+			*num_deleted = *num_deleted + 1;
+		}
+		else
+			current = current->next;
+	}
+	return (new_head);
+}
 
 int	recursive_length(t_Node *node)
 {

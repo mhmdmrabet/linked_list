@@ -10,6 +10,7 @@ typedef struct s_node{
 	struct s_node	*next;
 }	t_Node;
 
+t_Node	*efficient_delete_match(t_Node *head, int delete_value, int *num_deleted);
 t_Node	*delete_all_matches(t_Node *head, int delete_value, int *num_deleted);
 t_Node	*delete_first_match(t_Node *head, int delete_value, int *was_deleted);
 t_Node	*insert_at_head(t_Node *head, int new_value);
