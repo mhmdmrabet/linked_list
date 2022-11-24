@@ -176,6 +176,30 @@ t_Node	*append_list(t_Node *head1, t_Node *head2)
 	return (head1);
 }
 
+t_Node	*reverse_list(t_Node *head)
+{
+	t_Node	*next_node;
+	t_Node	*current;
+	t_Node	*tmp;
+
+	if (!head)
+		return (NULL);
+	if (!head->next)
+		return (head);
+	current = head;
+	next_node = head->next;
+	current->next = NULL;
+
+	while (next_node)
+	{
+		tmp = next_node->next;
+		next_node->next = current;
+		current = next_node;
+		next_node = tmp;
+	}
+	return (current);
+}
+
 int	recursive_length(t_Node *node)
 {
 	if (!node)

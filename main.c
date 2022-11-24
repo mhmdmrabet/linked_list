@@ -10,6 +10,7 @@ int	main(void)
 	list2_head = NULL;
 	list2_head = insert_at_head(list2_head, 24);
 	list1_head = append_list(list1_head, list2_head);
+	list1_head = reverse_list(list1_head);
 	print_list(list1_head);
 	free(list1_head);
 	free(list2_head);

@@ -14,6 +14,7 @@ t_Node	*efficient_delete_match(t_Node *head, int delete_value, int *num_deleted)
 t_Node	*delete_all_matches(t_Node *head, int delete_value, int *num_deleted);
 t_Node	*delete_first_match(t_Node *head, int delete_value, int *was_deleted);
 t_Node	*append_list(t_Node *head1, t_Node *head2);
+t_Node	*reverse_list(t_Node *head);
 t_Node	*insert_at_head(t_Node *head, int new_value);
 t_Node	*insert_at_tail(t_Node *head, int new_value);
 t_Node	*delete_at_head(t_Node *head);
