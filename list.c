@@ -1,38 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-typedef struct s_node{
-	int				value;
-	struct s_node	*next;
-}	t_Node;
-
-t_Node	*insert_at_head(t_Node *head, int new_value);
-t_Node	*insert_at_tail(t_Node *head, int new_value);
-t_Node	*delete_at_head(t_Node *head);
-t_Node	*delete_at_tail(t_Node *head);
-void	replace_matches(t_Node *node, int find_value, int replace_value);
-void	print_list(t_Node *head);
-int		recursive_length(t_Node *node);
-int		is_member(t_Node *node, int find_value);
-int		count_matches(t_Node *node, int find_value);
-int		length(t_Node *head);
-
-int	main(void)
-{
-	t_Node	*list1_head;
-
-	list1_head = NULL;
-	list1_head = insert_at_head(list1_head, 7);
-	list1_head = insert_at_head(list1_head, 4);
-	list1_head = insert_at_head(list1_head, 22);
-	list1_head = insert_at_head(list1_head, 2);
-	list1_head = insert_at_tail(list1_head, 22);
-	replace_matches(list1_head, 22, 24);
-	print_list(list1_head);
-}
-
-
+#include "list.h"
 
 t_Node	*insert_at_head(t_Node *head, int new_value)
 {
@@ -103,6 +69,60 @@ t_Node	*delete_at_tail(t_Node *head)
 		free(current);
 		return (head);
 	}
+}
+
+t_Node	*delete_first_match(t_Node *head, int delete_value, int *was_deleted)
+{
+	t_Node	*previous;
+	t_Node	*current;
+	t_Node	*tmp;
+
+	if (!head)
+	{
+		*was_deleted = 0;
+		return (NULL);
+	}
+	if (head->value == delete_value)
+	{
+		tmp = head->next;
+		free(head);
+		*was_deleted = 1;
+		return (tmp);
+	}
+	current = head->next;
+	previous = head;
+	while (current)
+	{
+		if (current->value == delete_value)
+		{
+			previous->next = current->next;
+			free(current);
+			*was_deleted = 1;
+			return (head);
+		}
+		previous = current;
+		current = current->next;
+	}
+	*was_deleted = 0;
+	return (head);
+}
+
+t_Node	*delete_all_matches(t_Node *head, int delete_value, int *num_deleted)
+{
+	t_Node	*current;
+	int		deleted;
+
+	*num_deleted = 0;
+	current = head;
+	deleted = 1;
+	while (deleted)
+	{
+		deleted = 0;
+		current = delete_first_match(current, delete_value, &deleted);
+		if (deleted)
+			*num_deleted = *num_deleted + 1;
+	}
+	return (current);
 }
 
 int	recursive_length(t_Node *node)
