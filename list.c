@@ -124,6 +124,7 @@ t_Node	*delete_all_matches(t_Node *head, int delete_value, int *num_deleted)
 	}
 	return (current);
 }
+
 t_Node	*efficient_delete_match(t_Node *head, int delete_value, int *num_deleted)
 
 {
@@ -158,6 +159,21 @@ t_Node	*efficient_delete_match(t_Node *head, int delete_value, int *num_deleted)
 			current = current->next;
 	}
 	return (new_head);
+}
+
+t_Node	*append_list(t_Node *head1, t_Node *head2)
+{
+	t_Node	*current;
+
+	current = head1;
+	if (!head1)
+		return (head2);
+	while (current->next)
+	{
+		current = current->next;
+	}
+	current->next = head2;
+	return (head1);
 }
 
 int	recursive_length(t_Node *node)
