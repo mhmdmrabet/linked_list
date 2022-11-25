@@ -125,7 +125,7 @@ t_Node	*delete_all_matches(t_Node *head, int delete_value, int *num_deleted)
 	return (current);
 }
 
-t_Node	*efficient_delete_match(t_Node *head, int delete_value, int *num_deleted)
+t_Node	*efficient_delete_match(t_Node *head, int delete_value, int *num_del)
 
 {
 	t_Node	*current;
@@ -133,7 +133,7 @@ t_Node	*efficient_delete_match(t_Node *head, int delete_value, int *num_deleted)
 	t_Node	*tmp;
 
 	current = head;
-	*num_deleted = 0;
+	*num_del = 0;
 	if (!head)
 		return (NULL);
 	while (current->value == delete_value)
@@ -141,7 +141,7 @@ t_Node	*efficient_delete_match(t_Node *head, int delete_value, int *num_deleted)
 		tmp = current;
 		current = current->next;
 		free(tmp);
-		*num_deleted = *num_deleted + 1;
+		*num_del= *num_del + 1;
 		if (!current)
 			return (NULL);
 	}
@@ -153,7 +153,7 @@ t_Node	*efficient_delete_match(t_Node *head, int delete_value, int *num_deleted)
 			tmp = current->next;
 			current->next = current->next->next;
 			free(tmp);
-			*num_deleted = *num_deleted + 1;
+			*num_del = *num_del + 1;
 		}
 		else
 			current = current->next;
@@ -189,7 +189,6 @@ t_Node	*reverse_list(t_Node *head)
 	current = head;
 	next_node = head->next;
 	current->next = NULL;
-
 	while (next_node)
 	{
 		tmp = next_node->next;
@@ -199,6 +198,28 @@ t_Node	*reverse_list(t_Node *head)
 	}
 	return (current);
 }
+
+t_Node	*reverse_list_iterative(t_Node *head)
+{
+	t_Node	*current;
+	t_Node	*previous;
+	t_Node	*next;
+
+	current = head;
+	previous = NULL;
+	next = NULL;
+	// NULL			->	a		->	b 		-> c
+	// previous			current		next	
+	while (current)
+	{
+		next = current->next;
+		current->next = previous;
+		previous = current;
+		current = next;
+	}
+	return (previous);
+}
+
 
 int	recursive_length(t_Node *node)
 {

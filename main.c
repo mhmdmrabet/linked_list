@@ -7,11 +7,11 @@ int	main(void)
 
 	list1_head = NULL;
 	list1_head = insert_at_head(list1_head, 7);
-	list2_head = NULL;
-	list2_head = insert_at_head(list2_head, 24);
-	list1_head = append_list(list1_head, list2_head);
+	list1_head = insert_at_tail(list1_head, 11);
+	// list2_head = NULL;
+	// list2_head = insert_at_head(list2_head, 24);
+	// list2_head = insert_at_tail(list2_head, 11);
+	// list1_head = append_list(list1_head, list2_head);
 	list1_head = reverse_list(list1_head);
 	print_list(list1_head);
-	free(list1_head);
-	free(list2_head);
 }
