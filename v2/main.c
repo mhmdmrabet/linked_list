@@ -47,6 +47,18 @@ void	insert_end(t_node **root, int value)
 	current->next = new_node;
 }
 
+void	insert_beginning(t_node **root, int value)
+{
+	t_node	*new_node;
+
+	new_node = malloc(sizeof(t_node));
+	if (new_node == NULL)
+		exit (1);
+	new_node->value = value;
+	new_node->next = *root;
+	*root = new_node;
+}
+
 void	deallocate(t_node **root)
 {
 	t_node	*curr;
@@ -73,6 +85,7 @@ int	main(void)
 	root->value = 15;
 	insert_end(&root, 22);
 	insert_end(&root, 11);
+	insert_beginning(&root, 30);
 	iterate(root);
 	deallocate(&root);
 	return (0);
