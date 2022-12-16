@@ -47,6 +47,21 @@ void	insert_end(t_node **root, int value)
 	current->next = new_node;
 }
 
+void	deallocate(t_node **root)
+{
+	t_node	*curr;
+	t_node	*tmp;
+
+	curr = *root;
+	while (curr)
+	{
+		tmp = curr;
+		curr = curr->next;
+		free(tmp);
+	}
+	*root = NULL;
+}
+
 int	main(void)
 {
 	t_node	*root;
@@ -59,5 +74,6 @@ int	main(void)
 	insert_end(&root, 22);
 	insert_end(&root, 11);
 	iterate(root);
+	deallocate(&root);
 	return (0);
 }
