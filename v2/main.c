@@ -26,18 +26,38 @@ void	iterate(t_node *root)
 	}
 }
 
+void	insert_end(t_node **root, int value)
+{
+	t_node	*new_node;
+	t_node	*current;
+
+	current = *root;
+	new_node = malloc(sizeof(t_node));
+	if (new_node == NULL)
+		exit(1);
+	new_node->next = NULL;
+	new_node->value = value;
+	if (*root == NULL)
+	{
+		*root = new_node;
+		return ;
+	}
+	while (current->next != NULL)
+		current = current->next;
+	current->next = new_node;
+}
+
 int	main(void)
 {
-	t_node	root;
+	t_node	*root;
 
-	root.value = 15;
-	root.next = malloc(sizeof(t_node));
-	root.next->value = -2;
-	root.next->next = malloc(sizeof(t_node));
-	root.next->next->value = 22;
-	root.next->next->next = NULL;
-	iterate(&root);
-	free(root.next->next);
-	free(root.next);
+	root = malloc(sizeof(t_node));
+	if (root == NULL)
+		exit (1);
+	root->next = NULL;
+	root->value = 15;
+	insert_end(&root, 22);
+	insert_end(&root, 11);
+	iterate(root);
 	return (0);
 }
