@@ -22,8 +22,9 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
-void	insert_end(t_node **root, int value);
 void	insert_beginning(t_node **root, int value);
+void	insert_after(t_node *node, int value);
+void	insert_end(t_node **root, int value);
 void	deallocate(t_node **root);
 void	iterate(t_node *root);
 
