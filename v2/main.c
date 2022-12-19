@@ -46,9 +46,10 @@ int	main(void)
 	t_node	*root;
 
 	root = NULL;
-	insert_end(&root, 22);
-	insert_end(&root, 11);
-	insert_after(root, 7);
+	insert_sorted(&root, 5);
+	insert_sorted(&root, 4);
+	insert_sorted(&root, 1);
+	insert_sorted(&root, 7);
 	iterate(root);
 	deallocate(&root);
 	return (0);
