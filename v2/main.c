@@ -47,9 +47,9 @@ int	main(void)
 
 	root = NULL;
 	insert_sorted(&root, 1);
-	insert_sorted(&root, 5);
-	insert_sorted(&root, 11);
-	remove_element(&root, 7);
+	insert_sorted(&root, 3);
+	insert_sorted(&root, 6);
+	reverse(&root);
 	iterate(root);
 	deallocate(&root);
 	return (0);
