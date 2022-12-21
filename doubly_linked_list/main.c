@@ -53,8 +53,8 @@ int	main(void)
 	init(&tail, &head, 7);
 	insert_beginning(&tail, 3);
 	insert_beginning(&tail, 1);
-	insert_end(&head, 5);
-	iterate_back(head);
+	insert_after(tail->next, 5);
+	iterate(tail);
 	deallocate(&tail, &head);
 	return (0);
 }
