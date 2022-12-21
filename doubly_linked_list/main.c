@@ -12,6 +12,20 @@
 
 #include "./doubly_linked_list.h"
 
+void	iterate(t_node *tail)
+{
+	t_node	*current;
+	int		i;
+
+	current = tail;
+	i = 0;
+	while (current)
+	{
+		printf("[%d] %d\n", i++, current->value);
+		current = current->next;
+	}
+}
+
 int	main(void)
 {
 	t_node	*tail;
