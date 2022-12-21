@@ -29,6 +29,7 @@ void	deallocate(t_node **tail, t_node **head);
 void	insert_after(t_node *node, int value);
 void	insert_end(t_node **head, int value);
 void	iterate_back(t_node *head);
+void	remove_node(t_node *node);
 void	iterate(t_node *tail);
 
 #endif

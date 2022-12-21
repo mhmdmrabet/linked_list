@@ -46,14 +46,19 @@ void	init(t_node **tail, t_node **head, int value)
 int	main(void)
 {
 	t_node	*tail;
+	// t_node	*aux;
 	t_node	*head;
 
 	tail = NULL;
 	head = NULL;
 	init(&tail, &head, 7);
 	insert_beginning(&tail, 3);
-	insert_beginning(&tail, 1);
-	insert_after(tail->next, 5);
+	insert_end(&head, 22);
+	insert_end(&head, 33);
+	insert_end(&head, 11);
+	// aux = tail->next;
+	remove_node(tail->next->next);
+	// tail = aux;
 	iterate(tail);
 	deallocate(&tail, &head);
 	return (0);
