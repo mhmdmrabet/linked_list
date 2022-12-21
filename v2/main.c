@@ -66,8 +66,8 @@ int	main(void)
 	insert_sorted(&root, 1);
 	insert_sorted(&root, 3);
 	insert_sorted(&root, 6);
-	reverse(&root);
 	iterate(root);
+	printf("Linked list has %d elements.\n", count_recursive(root));
 	deallocate(&root);
 	return (0);
 }
