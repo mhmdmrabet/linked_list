@@ -51,9 +51,10 @@ int	main(void)
 	tail = NULL;
 	head = NULL;
 	init(&tail, &head, 7);
-	insert_beggining(&tail, 3);
-	insert_beggining(&tail, 1);
-	iterate(tail);
+	insert_beginning(&tail, 3);
+	insert_beginning(&tail, 1);
+	insert_end(&head, 5);
+	iterate_back(head);
 	deallocate(&tail, &head);
 	return (0);
 }

@@ -22,8 +22,19 @@ void	insert_beginning(t_node **tail, int value)
 	new_node->value = value;
 	new_node->previous = NULL;
 	new_node->next = *tail;
-	if (*tail != NULL)
-		(*tail)->previous = new_node;
 	*tail = new_node;
 }
 
+void	insert_end(t_node **head, int value)
+{
+	t_node	*new_node;
+
+	new_node = malloc(sizeof(t_node));
+	if (new_node == NULL)
+		return ;
+	new_node->value = value;
+	new_node->next = NULL;
+	new_node->previous = *head;
+	(*head)->next = new_node;
+	*head = new_node;
+}
