@@ -41,6 +41,23 @@ void	deallocate(t_node **root)
 	*root = NULL;
 }
 
+int	has_loops(t_node *root)
+{
+	t_node	*slow;
+	t_node	*fast;
+
+	slow = root;
+	fast = root;
+	while (slow != NULL && fast != NULL && fast->next != NULL)
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+		if (slow == fast)
+			return (1);
+	}
+	return (0);
+}
+
 int	main(void)
 {
 	t_node	*root;
