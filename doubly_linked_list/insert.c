@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   insert.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmrabet <mmrabet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 10:37:40 by mmrabet           #+#    #+#             */
-/*   Updated: 2022/12/21 10:37:40 by mmrabet          ###   ########.fr       */
+/*   Created: 2022/12/21 13:06:53 by mmrabet           #+#    #+#             */
+/*   Updated: 2022/12/21 13:06:53 by mmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./doubly_linked_list.h"
 
-void	deallocate(t_node **tail, t_node **head)
-{
-	t_node	*current;
-
-	if (*tail == NULL)
-		return ;
-	current = *tail;
-	while (current->next)
-	{
-		current = current->next;
-		free(current->previous);
-	}
-	free(current);
-	*tail = NULL;
-	*head = NULL;
-}
-
-void	init(t_node **tail, t_node **head, int value)
+void	insert_beginning(t_node **tail, int value)
 {
 	t_node	*new_node;
 
@@ -38,22 +21,9 @@ void	init(t_node **tail, t_node **head, int value)
 		return ;
 	new_node->value = value;
 	new_node->previous = NULL;
-	new_node->next = NULL;
+	new_node->next = *tail;
+	if (*tail != NULL)
+		(*tail)->previous = new_node;
 	*tail = new_node;
-	*head = new_node;
 }
 
-int	main(void)
-{
-	t_node	*tail;
-	t_node	*head;
-
-	tail = NULL;
-	head = NULL;
-	init(&tail, &head, 7);
-	insert_beggining(&tail, 3);
-	insert_beggining(&tail, 1);
-	iterate(tail);
-	deallocate(&tail, &head);
-	return (0);
-}
