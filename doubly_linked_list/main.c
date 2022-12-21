@@ -12,30 +12,21 @@
 
 #include "./doubly_linked_list.h"
 
-void	iterate_back(t_node *head)
+void	deallocate(t_node **tail, t_node **head)
 {
 	t_node	*current;
 
-	current = head;
-	while (current)
+	if (*tail == NULL)
+		return ;
+	current = *tail;
+	while (current->next)
 	{
-		printf("[-] %d\n", current->value);
-		current = current->previous;
-	}
-}
-
-void	iterate(t_node *tail)
-{
-	t_node	*current;
-	int		i;
-
-	current = tail;
-	i = 0;
-	while (current)
-	{
-		printf("[%d] %d\n", i++, current->value);
 		current = current->next;
+		free(current->previous);
 	}
+	free(current);
+	*tail = NULL;
+	*head = NULL;
 }
 
 int	main(void)
@@ -57,5 +48,6 @@ int	main(void)
 	head = tail->next;
 	iterate(tail);
 	iterate_back(head);
+	deallocate(&tail, &head);
 	return (0);
 }

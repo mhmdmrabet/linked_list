@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   doubly_linked_list.h                               :+:      :+:    :+:   */
+/*   iterate.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmrabet <mmrabet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 10:34:35 by mmrabet           #+#    #+#             */
-/*   Updated: 2022/12/21 10:34:35 by mmrabet          ###   ########.fr       */
+/*   Created: 2022/12/21 12:50:05 by mmrabet           #+#    #+#             */
+/*   Updated: 2022/12/21 12:50:05 by mmrabet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DOUBLY_LINKED_LIST_H
-# define DOUBLY_LINKED_LIST_H
+#include "./doubly_linked_list.h"
 
-# include <stdio.h>
-# include <stdlib.h>
-
-typedef struct s_node
+void	iterate_back(t_node *head)
 {
-	int				value;
-	struct s_node	*previous;
-	struct s_node	*next;
-}	t_node;
+	t_node	*current;
 
-void	deallocate(t_node **tail, t_node **head);
-void	iterate_back(t_node *head);
-void	iterate(t_node *tail);
+	current = head;
+	while (current)
+	{
+		printf("[-] %d\n", current->value);
+		current = current->previous;
+	}
+}
 
-#endif
+void	iterate(t_node *tail)
+{
+	t_node	*current;
+	int		i;
+
+	current = tail;
+	i = 0;
+	while (current)
+	{
+		printf("[%d] %d\n", i++, current->value);
+		current = current->next;
+	}
+}
