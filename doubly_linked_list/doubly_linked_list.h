@@ -23,8 +23,11 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
+t_node	*find_node_recursive(t_node *node, int value);
+t_node	*find_node(t_node *tail, int value);
 void	init(t_node **tail, t_node **head, int value);
 void	insert_beginning(t_node **tail, int value);
+void	deallocate(t_node **tail, t_node **head);
 void	deallocate(t_node **tail, t_node **head);
 void	insert_after(t_node *node, int value);
 void	insert_end(t_node **head, int value);

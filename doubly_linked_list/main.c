@@ -12,6 +12,51 @@
 
 #include "./doubly_linked_list.h"
 
+int	main(void)
+{
+	t_node	*tail;
+	t_node	*head;
+	t_node	*found;
+
+	tail = NULL;
+	head = NULL;
+	init(&tail, &head, 7);
+	insert_end(&head, 22);
+	insert_end(&head, 33);
+	insert_end(&head, 11);
+	found = find_node(tail, 42);
+	if (found != NULL)
+		printf("founded : %d | next : %p\n", found->value, found->next);
+	else
+		printf("NULL\n");
+	iterate(tail);
+	deallocate(&tail, &head);
+	return (0);
+}
+
+t_node	*find_node(t_node *tail, int value)
+{
+	t_node	*current;
+
+	current = tail;
+	while (current)
+	{
+		if (current->value == value)
+			return (current);
+		current = current->next;
+	}
+	return (NULL);
+}
+
+t_node	*find_node_recursive(t_node *node, int value)
+{
+	if (node == NULL)
+		return (NULL);
+	if (node->value == value)
+		return (node);
+	return (find_node_recursive(node->next, value));
+}
+
 void	deallocate(t_node **tail, t_node **head)
 {
 	t_node	*current;
@@ -27,39 +72,4 @@ void	deallocate(t_node **tail, t_node **head)
 	free(current);
 	*tail = NULL;
 	*head = NULL;
-}
-
-void	init(t_node **tail, t_node **head, int value)
-{
-	t_node	*new_node;
-
-	new_node = malloc(sizeof(t_node));
-	if (new_node == NULL)
-		return ;
-	new_node->value = value;
-	new_node->previous = NULL;
-	new_node->next = NULL;
-	*tail = new_node;
-	*head = new_node;
-}
-
-int	main(void)
-{
-	t_node	*tail;
-	// t_node	*aux;
-	t_node	*head;
-
-	tail = NULL;
-	head = NULL;
-	init(&tail, &head, 7);
-	insert_beginning(&tail, 3);
-	insert_end(&head, 22);
-	insert_end(&head, 33);
-	insert_end(&head, 11);
-	// aux = tail->next;
-	remove_node(tail->next->next);
-	// tail = aux;
-	iterate(tail);
-	deallocate(&tail, &head);
-	return (0);
 }
