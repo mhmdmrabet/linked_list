@@ -16,7 +16,6 @@ int	main(void)
 {
 	t_node	*tail;
 	t_node	*head;
-	t_node	*found;
 
 	tail = NULL;
 	head = NULL;
@@ -24,14 +23,31 @@ int	main(void)
 	insert_end(&head, 22);
 	insert_end(&head, 33);
 	insert_end(&head, 11);
-	found = find_node(tail, 42);
-	if (found != NULL)
-		printf("founded : %d | next : %p\n", found->value, found->next);
-	else
-		printf("NULL\n");
+	iterate(tail);
+	reverse(&tail, &head);
+	printf("\t\tREVERSE\n");
 	iterate(tail);
 	deallocate(&tail, &head);
 	return (0);
+}
+
+void	reverse(t_node **tail, t_node **head)
+{
+	t_node	*current;
+	t_node	*next;
+	t_node	*aux;
+
+	current = *tail;
+	while (current)
+	{
+		next = current->next;
+		current->next = current->previous;
+		current->previous = next;
+		current = next;
+	}
+	aux = *tail;
+	*tail = *head;
+	*head = aux;
 }
 
 t_node	*find_node(t_node *tail, int value)

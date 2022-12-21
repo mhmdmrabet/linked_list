@@ -30,6 +30,7 @@ void	insert_beginning(t_node **tail, int value);
 void	deallocate(t_node **tail, t_node **head);
 void	deallocate(t_node **tail, t_node **head);
 void	insert_after(t_node *node, int value);
+void	reverse(t_node **tail, t_node **head);
 void	insert_end(t_node **head, int value);
 void	iterate_back(t_node *head);
 void	remove_node(t_node *node);
